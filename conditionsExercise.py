@@ -8,11 +8,11 @@
 # Enter your age: 15
 # You need 3 more years to learn to drive.
 
-# age = int(input("Enter your age: "))
-# if age >=18:
-#    print("You are old enough to drive")
-# else:
-#     print(" wait for the missing amount of years.")
+age = int(input("Enter your age: "))
+if age >=18:
+   print("You are old enough to drive")
+else:
+    print(" wait for the missing amount of years.")
 
 
 # Compare the values of my_age and your_age using if … else. 
