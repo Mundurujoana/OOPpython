@@ -64,3 +64,7 @@ def facrorial(num):
         fact=fact*i
         i=i+1
     return fact
+
+word= input("Enter a word: ")
+vowel = 0
+if ('a'==)
