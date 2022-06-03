@@ -111,22 +111,95 @@ print(find_even_numbers(10))
 
 # my_country(country="Rwanda", student="Mercy")
 
-# def greetMultiply(*names):
-#     for name in names:
-#         print("Hello {}.fnames")
+#Python *args and **kwargs
 
-#         greetMultiply("joana","Sarah","brendah","Namcy","glory")
+def greetMultiply(*names):
+    for name in names:
+        print("Hello {}.fnames")
 
-# write a name that accepts any number of integer and return the sum ofall of them
-
-
-# def add(*numbers):
-#     sum=0
-#     for number in numbers:
-#       sum+=number
-#       return sum
+        greetMultiply("joana","Sarah","brendah","Namcy","glory")
 
 
+def results(*args):
+    result=0
+    for i in args:
+        result+=1
+        return results
+
+results(1,2,3,4,5)
+
+def greetIngs(name, msg="how are you doing"):
+    print(f"Hello {name}, {msg}")
+
+greetIngs("joana")
+greetIngs("joana","where are you goimg")
+
+
+
+def add(*numbers):
+    total = 0
+    for num in numbers:
+        total += num
+    return total
+
+print(add(2, 3))
+print(add(2, 3, 5))
+print(add(2, 3, 5, 7))
+print(add(2, 3, 5, 7, 9))
+
+
+
+def total_fruits(**fruits):
+    total = 0
+    for amount in fruits.values():
+        total += amount
+    return total
+
+print(total_fruits(banana=5, mango=7, apple=8))
+print(total_fruits(banana=5, mango=7, apple=8, oranges=10))
+print(total_fruits(banana=5, mango=7))
+
+
+def intro(**data):
+    for key, value in data.items():
+        print("{} is {}".format(key,value))
+
+intro(Firstname="Sita", Lastname="Sharma", Age=22, Phone=1234567890)
+intro(Firstname="John", Lastname="Wood", Email="johnwood@nomail.com", Country="Wakanda", Age=25, Phone=9876543210)
+
+
+def concatenate(**words):
+    result = ""
+    for arg in words.values():
+        result += arg
+    return result
+
+print(concatenate(a="Real", b="Python", c="Is", d="Great", e="!"))
+
+
+#default functions in python
+def greet(name, msg="How do you do?"):
+  print("Hello ", name + ', ' + msg)
+ 
+greet("Ankit")
+greet("Ankit", "How do you do?")
+ 
+
+def appendItem(itemName, itemList = []):
+    itemList.append(itemName)
+    return itemList
+ 
+print(appendItem('notebook'))
+print(appendItem('pencil'))
+print(appendItem('eraser'))
+
+
+def greet(name, message='Hi'):
+    return f"{message} {name}"
+
+
+greeting = greet('John', 'Hello')
+print(greeting)
 # def greetMultiply(**kwargs):
 #     print(kwargs.keys())
 #     print(kwargs.values())
@@ -177,16 +250,3 @@ print(find_even_numbers(10))
 
 # sum_and_greet(1,2,3, name='joana'):
 
-def results(*args):
-    result=0
-    for i in args:
-        result+=1
-        return results
-
-results(1,2,3,4,5)
-
-def greetIngs(name, msg="how are you doing"):
-    print(f"Hello {name}, {msg}")
-
-greetIngs("joana")
-greetIngs("joana","where are you goimg")

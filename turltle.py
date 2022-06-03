@@ -1,10 +1,5 @@
-from turtle import *
-color('red', 'yellow')
-begin_fill()
-while True:
-    forward(200)
-    left(170)
-    if abs(pos()) < 1:
-        break
-end_fill()
-done()
+from tkinter import *
+
+import turtle
+screen =turtle.Screen()
+screen=turtle.bgcolor('light blue')

@@ -13,7 +13,7 @@ class Student:
     def full_name(self):
         return f"{self.first_name} {self.last_name}"
         
-    def get_initial(self):
+    def get_initials(self):
         return f"{self.first_name[0].split()} {self.last_name[0].split()}"
 
     def greeting(self):

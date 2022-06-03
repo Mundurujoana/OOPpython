@@ -1,9 +1,4 @@
 
-from pyexpat import model
-from turtle import color
-from typing_extensions import Self
-
-
 class Car:
    wheels="four"
 def __init__(self,carId,model,make,regNo,color,size,weight,price):
@@ -14,5 +9,8 @@ def __init__(self,carId,model,make,regNo,color,size,weight,price):
     self.size=size
     self.weight=weight
     self.price=price
-    
+    self.carid=carId
             
+ 
+
+        
