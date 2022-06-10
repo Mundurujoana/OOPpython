@@ -15,7 +15,7 @@ class Account:
         else:
             self.acc_balance +=amount
         self.deposits.append(amount)
-        return f"Hello {self.acc_name}, your new balance is {self.acc_balance}"
+        return f"Hello {self.acc_name}, you have deposited {amount},and your new balance is {self.acc_balance}"
 
 
     def withdraw(self,amount):
@@ -29,7 +29,7 @@ class Account:
          else:
           self.acc_balance -= (amount+transaction)
           self.withdrawals.append(amount)
-          return f"Hello {self.acc_name}, you have withdrawn {amount}, and a transaction fee of {transaction} has been deducted to your account and your new balance is {self.acc_balance}"
+          return f"Hello {self.acc_name}, you have withdrawn {amount}, and a transaction fee of {transaction} has been deducted to your account and your new balance now is {self.acc_balance}"
    
     def deposits_statement(self):
         for depo in self.deposits:
