@@ -8,6 +8,7 @@ class Account:
         self.acc_balance=0
         self.deposits=[]
         self.withdrawals=[]
+        self.transaction=100
         
     def deposit(self,amount):
         if amount<=0:
@@ -19,15 +20,14 @@ class Account:
 
 
     def withdraw(self,amount):
-         transaction = 100
-         if(amount+transaction)>self.acc_balance:
+         if(amount+self.transaction)>self.acc_balance:
             return f"Insufficient funds"
 
-         elif(amount+transaction)<=0:
+         elif(amount+self.transaction)<=0:
           return f"amount must be greater than 0"
 
          else:
-          self.acc_balance -= (amount+transaction)
+          self.acc_balance -= (amount+self.transaction)
           self.withdrawals.append(amount)
           return f"Hello {self.acc_name}, you have withdrawn {amount}, and a transaction fee of {transaction} has been deducted to your account and your new balance now is {self.acc_balance}"
    
