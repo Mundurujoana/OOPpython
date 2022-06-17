@@ -33,12 +33,11 @@ class Account:
    
     def deposits_statement(self):
         for depo in self.deposits:
-            print(depo)
-
+              print(f"your withdraw was:{depo}")
 
     def  withdrawals_statement(self):
         for withdrawal in self.withdrawals:
-            print(withdrawal)
+            print(f"your withdraw was:{withdrawal}")
 
     def current_balance(self):
-       return(f"Hello{self.acc_name}, you cuurent balance is {self.acc_balance}")
+       return(f"Hello{self.acc_name}, you curent balance is {self.acc_balance}")
