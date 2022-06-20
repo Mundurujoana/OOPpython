@@ -90,12 +90,17 @@ class Account:
             self.loan_balance-=amount
             overpay = amount - self.loan_balance
             self.balance+=overpay
-            return f"Dear {self.acc_name} thank you, your loan of {self.loan_balance} and your current loan balance is {self.loan_balance}"
+            return f"Hello {self.acc_name} thank you, your loan of {self.loan_balance} and your current loan balance is {self.loan_balance}"
 
 
-
-
-
+    def transfer(self,amount,instance_account):
+      if amount > self.acc_balance:
+          self.acc_balance-=amount
+          return f" Hello {self.acc_name}, your account balance is less, we cannot transfer"
+      else:
+            self.acc_balance-= amount
+            instance_account+= amount
+            return f"YHello {self.acc_balance},you have deposited {amount} to {instance_account} and your balance is {self.acc_balance}"
 
 
 
