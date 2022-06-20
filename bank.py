@@ -1,4 +1,4 @@
-
+from datetime import date, datetime
 
 class Account:
     bank="postbank"
@@ -6,16 +6,23 @@ class Account:
         self.acc_name=acc_name
         self.acc_number=acc_number
         self.acc_balance=0
-        self.deposits=[]
-        self.withdrawals=[]
         self.transaction=100
+        self.withdrawals=[]
+        self.deposits=[]
+        self.bank_both=[]
+        self.now =datetime.now()
+        self.loan_balance=0
+       
+
         
     def deposit(self,amount):
         if amount<=0:
             return f"Deposit amount must be greater than zero"
         else:
             self.acc_balance +=amount
-        self.deposits.append(amount)
+
+        self.deposits.append({"date": self.now.strftime("%d/%m/%y"), "amount": amount,"narration": " deposit"}
+)
         return f"Hello {self.acc_name}, you have deposited {amount},and your new balance is {self.acc_balance}"
 
 
@@ -28,16 +35,104 @@ class Account:
 
          else:
           self.acc_balance -= (amount+self.transaction)
-          self.withdrawals.append(amount)
-          return f"Hello {self.acc_name}, you have withdrawn {amount}, and a transaction fee of {transaction} has been deducted to your account and your new balance now is {self.acc_balance}"
-   
+          self.withdrawals.append({"date": self.now.strftime("%d/%m/%y"), "amount": amount,"narration": "withdrawal"})
+
+          return f"Hello {self.acc_name}, you have withdrawn {amount}, and a transaction fee of {self.transaction} has been deducted  on your account and your new balance now is {self.acc_balance}"
+       
+
     def deposits_statement(self):
         for depo in self.deposits:
-              print(f"your withdraw was:{depo}")
+              return f"your withdraw was:{depo}"
 
     def  withdrawals_statement(self):
         for withdrawal in self.withdrawals:
-            print(f"your withdraw was:{withdrawal}")
+         return f"your withdraw was:{withdrawal}"
 
     def current_balance(self):
        return f"Hello{self.acc_name}, you curent balance is {self.acc_balance}"
+
+    def full_statement(self):
+          for item in self.bank_both :
+            self.bank_both.sort(key=lambda item: item['date'], reverse=True)
+            date = item['date']
+            amount = item['amount']
+            narration = item['narration']
+            return f"{date}----------- {narration}----------- {amount}"
+
+
+    def borrow(self,amount):
+      sum = 0
+      for depo in self.deposits:
+        sum+=depo["amount"]
+
+      if len(self.deposits) < 10:
+        return f"Hello {self.acc_name},you must have more than 10 deposits to be granted loan"
+      elif amount < 100:
+        return f"Sorry {self.acc_name},you cannot borrow an amount less than 100"
+      elif amount > (sum//3):
+        return f"hello{self.acc_name}, you can only qualify for a loan if you have amount upto 1/3 {sum//3}"
+      elif self.acc_balance==0:
+           return f" Hello {self.acc_name} you have an outstanding balance of: {self.acc_balance}"
+      elif self.loan_balance>0:
+           return f"hello {self.acc_name} you have an outstanding loanbalance of {self.loan_balance}"
+      else:
+
+       self.loan_balance+=(amount+(amount*0.03))
+       return f" Hello {self.acc_name} you have borrowed {self.loan_balance} and your balance is {self.loan_balance} with an interest rate of {amount*0.03}"
+
+    def loan_repayment(self,amount):
+      if amount <self.loan_balance:
+         return f"you are not eligible to pay your loan"
+      elif amount >self.loan_balance:
+         self.acc_balance+=(amount-self.loan_balance)
+         return f" Thank you {self.acc_name} for repaying your loan of {self.loan_balance} and your account balance is now: {self.acc_balance}"
+      else:
+            self.loan_balance-=amount
+            overpay = amount - self.loan_balance
+            self.balance+=overpay
+            return f"Dear {self.acc_name} thank you, your loan of {self.loan_balance} and your current loan balance is {self.loan_balance}"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
