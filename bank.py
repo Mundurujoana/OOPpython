@@ -1,4 +1,5 @@
 from datetime import date, datetime
+from functools import total_ordering
 
 class Account:
     bank="postbank"
@@ -64,13 +65,18 @@ class Account:
       sum = 0
       for depo in self.deposits:
         sum+=depo["amount"]
+      # total =  sum([x[amount] for x in self.deposits])
 
       if len(self.deposits) < 10:
         return f"Hello {self.acc_name},you must have more than 10 deposits to be granted loan"
-      elif amount < 100:
+
+      elif amount > 100:
         return f"Sorry {self.acc_name},you cannot borrow an amount less than 100"
+
       elif amount > (sum//3):
         return f"hello{self.acc_name}, you can only qualify for a loan if you have amount upto 1/3 {sum//3}"
+      
+
       elif self.acc_balance==0:
            return f" Hello {self.acc_name} you have an outstanding balance of: {self.acc_balance}"
       elif self.loan_balance>0:
@@ -78,29 +84,30 @@ class Account:
       else:
 
        self.loan_balance+=(amount+(amount*0.03))
+       self.acc_balance+=amount
        return f" Hello {self.acc_name} you have borrowed {self.loan_balance} and your balance is {self.loan_balance} with an interest rate of {amount*0.03}"
 
     def loan_repayment(self,amount):
-      if amount <self.loan_balance:
+      if amount <=self.loan_balance:
+         self.loan_balance+=amount
          return f"you are not eligible to pay your loan"
-      elif amount >self.loan_balance:
-         self.acc_balance+=(amount-self.loan_balance)
-         return f" Thank you {self.acc_name} for repaying your loan of {self.loan_balance} and your account balance is now: {self.acc_balance}"
       else:
             self.loan_balance-=amount
             overpay = amount - self.loan_balance
-            self.balance+=overpay
+            self.acc_balance=0
             return f"Hello {self.acc_name} thank you, your loan of {self.loan_balance} and your current loan balance is {self.loan_balance}"
 
 
-    def transfer(self,amount,instance_account):
-      if amount > self.acc_balance:
-          self.acc_balance-=amount
-          return f" Hello {self.acc_name}, your account balance is less, we cannot transfer"
-      else:
-            self.acc_balance-= amount
-            instance_account+= amount
-            return f"YHello {self.acc_balance},you have deposited {amount} to {instance_account} and your balance is {self.acc_balance}"
+    def transfer(self,amount,new_account):
+      if amount<=0:
+            return f"invalid amount"
+      elif amount>= self.balance:
+            return f"insufficient amount in your account"
+
+      elif isinstance(new_account, Account):
+          self.acc_balance-= amount
+          new_account.deposit(amount)
+          return f"Hello {self.acc_balance},you have sent {amount} to {new_account} and your balance is {self.acc_balance}"
 
 
 
